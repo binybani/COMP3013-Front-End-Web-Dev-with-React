@@ -1,72 +1,29 @@
 import albums from "./data";
-
-export function Songs({id, name, coverImg, tracks}) {
-  return (
-    <>
-    <section className="albums" style={{display: 'flex'}}>
-      <div>
-        <img
-          className="coverImg"
-          src={coverImg}
-          alt={name}
-          width={300}
-          height={300}
-        />
-      </div>
-      <div>  
-        <ul style={{listStyle: 'none'}}>
-          {tracks.map((track, index) => (
-            <li key={index}>
-              {index+1}. {track} <button>play</button>
-            </li>
-          ))}
-        </ul> 
-      </div>
-    </section>
-    </>
-  )
-}
-export function Album({id, name, coverImg, tracks}) {
-  return (
-    <>
-    <section className="albums" style={{display: 'flex'}}>
-      <div>
-        <img
-          className="coverImg"
-          src={coverImg}
-          alt={name}
-          width={50}
-          height={50}
-          style={{borderRadius: '50%'}}
-        />
-      </div>
-      <div>  
-        <ul style={{listStyle: 'none', textDecoration:'none'}}>
-          <li>
-            <a href="">{name}</a>
-          </li>
-        </ul> 
-      </div>
-    </section>
-    </>
-  )
-}
+import Album from "./Album";
+import Songs from "./Songs";
+import { useState } from "react";
 
 export default function Player() {
+  const [selectedAlbum, setSelectedAlbum] = useState(null);
+
+  const handleAlbumClick = (album) => {
+    setSelectedAlbum(album);
+    console.log('Album clicked:', album);
+  };
   return (
     <>
     <div>
       <div>
-        {
-          albums.map((album) => (
-            <Songs
-            key={album.id}
-            name={album.name}
-            coverImg={album.coverImg}
-            tracks={album.tracks}
-            />
-          ))
-        }
+          <h1>{selectedAlbum ? selectedAlbum.name : 'Select an Album'}</h1>
+          {selectedAlbum && (
+          <Songs
+          id={selectedAlbum.id}
+          name={selectedAlbum.name}
+          coverImg={selectedAlbum.coverImg}
+          tracks={selectedAlbum.tracks}
+          />
+        )}
+ 
       </div>
       <div style={{maxWidth: '900px'}}>
         <h3 style={{textAlign: 'right'}}>Select an Album</h3>
@@ -79,6 +36,7 @@ export default function Player() {
           name={album.name}
           coverImg={album.coverImg}
           tracks={album.tracks}
+          handleAlbumClick={handleAlbumClick}
           />
         ))
       }
