@@ -4,8 +4,8 @@ import Songs from "./Songs";
 import { useState } from "react";
 
 export default function Player() {
-  const [selectedAlbum, setSelectedAlbum] = useState(null);
-
+  const defaluAlbum = albums.find(album => album.id === 0);
+  const [selectedAlbum, setSelectedAlbum] = useState(defaluAlbum);
   const handleAlbumClick = (album) => {
     setSelectedAlbum(album);
     console.log('Album clicked:', album);
@@ -14,7 +14,6 @@ export default function Player() {
     <>
     <div>
       <div>
-          <h1>{selectedAlbum ? selectedAlbum.name : 'Select an Album'}</h1>
           {selectedAlbum && (
           <Songs
           id={selectedAlbum.id}

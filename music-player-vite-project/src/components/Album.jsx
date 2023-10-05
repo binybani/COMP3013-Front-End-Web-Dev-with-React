@@ -1,10 +1,4 @@
-import Songs from "./Songs";
-
 export default function Album({id, name, coverImg, tracks, handleAlbumClick}) {
-  // const clickAlbumNameHandler = () => {
-  //   console.log("AAAAAAA");
- 
-  // }
   return (
     <>
     <section className="albums" style={{display: 'flex'}}>
@@ -21,11 +15,9 @@ export default function Album({id, name, coverImg, tracks, handleAlbumClick}) {
       <div>  
         <ul style={{listStyle: 'none', textDecoration:'none'}}>
           <li>
-          <a href="#" onClick={() => handleAlbumClick({ id, name, coverImg, tracks })}>
-  {name}
-</a>
-
-            {/* <a href="" onClick={updateAlbumNameHandler}>{name}</a> */}
+            <a href="#" onClick={() => handleAlbumClick({ id, name, coverImg, tracks })}>
+              {name}
+            </a>
           </li>
         </ul> 
       </div>
