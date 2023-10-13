@@ -1,13 +1,14 @@
 import { Header } from "./components/Header";
 import { Assignments } from "./components/Assignments";
 import { useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
 function App() {
   const [buttonState, setButtonState] = useState(true);
   const [enteredText, setEnteredText] = useState("");
-  const [enteredAssignments, setEnteredAssignments] = useState<string[]>([]); 
+  const [enteredAssignments, setEnteredAssignments] = useState<{ id: string, text: string, isChecked: boolean }[]>([]);
   const [completedAssignments, setCompletedAssignments] = useState(0);
-  const [isChecked, setIsChecked] = useState(false);
+  // const [isChecked, setIsChecked] = useState(false);
 
   const inputHandler =(event: any) => {
     if(event.target.value === "") {
@@ -18,18 +19,18 @@ function App() {
     setEnteredText(event.target.value); 
   }
 
-  const createAssignmentHandler = () => {
-    setEnteredAssignments([...enteredAssignments, enteredText]);
-    setEnteredText("");
-    setButtonState(true);
+  const createAssignmentHandler = (event: any) => {
+    event.preventDefault();
+      // Generate a unique key using UUID
+  const newAssignment = {
+    id: uuidv4(), // Generate a unique ID
+    text: enteredText,
+    isChecked: false,
   };
-
-  const deleteHandler = (indexToDelete: any) => {
-    const updatedAssignments = enteredAssignments.filter((_, index) => index !== indexToDelete);
-    setEnteredAssignments(updatedAssignments);
-    if (isChecked) {
-      setCompletedAssignments(completedAssignments - 1);
-    }  };
+ // Add the new assignment to the enteredAssignments list
+ setEnteredAssignments([...enteredAssignments, newAssignment]);    setEnteredText("");
+    // setCompletedAssignments(isChecked.length)
+  };
 
   return (
     <>
@@ -40,11 +41,14 @@ function App() {
       enteredText={enteredText}
       />
       <Assignments 
-      assignments={enteredAssignments}
-      deleteHandler={deleteHandler}
+      // enteredAssignments={enteredAssignments}
+      // deleteHandler={deleteHandler}
+      setCompletedAssignments={setCompletedAssignments}
       completedAssignments={completedAssignments}
-      // setCompletedAssignments={setCompletedAssignments}
+      setEnteredAssignments={setEnteredAssignments}
+      enteredAssignments={enteredAssignments}
       // isChecked={isChecked}
+      // setIsChecked={setIsChecked}
       />
     </>
   );
