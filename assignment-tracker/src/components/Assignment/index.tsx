@@ -5,11 +5,15 @@ import { BsCheckCircleFill } from "react-icons/bs";
 type AssignmentProps = { 
   enteredAssignments: { id: string; text: string, isChecked: boolean }[];
   deleteHandler: (assignmentKey: string) => void;
-  // isChecked: (boolean);
   checkButtonHandler: (assignmentKey: string) => void;
 }
 
-export function Assignment({enteredAssignments, deleteHandler, checkButtonHandler}: AssignmentProps) {
+export function Assignment(
+  {
+    enteredAssignments, 
+    deleteHandler, 
+    checkButtonHandler
+  }: AssignmentProps) {
   return (
     <div>
       <ul>
