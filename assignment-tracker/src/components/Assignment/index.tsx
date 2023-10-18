@@ -3,7 +3,7 @@ import { TbTrash } from "react-icons/tb";
 import { BsCheckCircleFill } from "react-icons/bs";
 
 type AssignmentProps = { 
-  enteredAssignments: { id: string; text: string, isChecked: boolean }[];
+  enteredAssignments: { id: string; text: string, isChecked: boolean, due: number }[];
   deleteHandler: (assignmentKey: string) => void;
   checkButtonHandler: (assignmentKey: string) => void;
 }
@@ -28,7 +28,7 @@ export function Assignment(
                   )}
               </button>
               <p>{assignment.text}</p>
-              <p>{assignment.id}</p>
+              <p>Due: {assignment.due} days</p>
               <button onClick={()=>deleteHandler(assignment.id)} className={styles.deleteButton}>
                 <TbTrash size={20} />
               </button>

@@ -4,8 +4,8 @@ import styles from "./assignments.module.css";
 type AssignmentsProps = { 
   completedAssignments: number;
   setCompletedAssignments: (completedAssignments: number) => void;
-  enteredAssignments: { id: string; text: string, isChecked: boolean }[];
-  setEnteredAssignments: React.Dispatch<React.SetStateAction<{ id: string; text: string; isChecked: boolean; }[]>>;
+  enteredAssignments: { id: string; text: string, isChecked: boolean, due: number }[];
+  setEnteredAssignments: React.Dispatch<React.SetStateAction<{ id: string; text: string; isChecked: boolean; due: number }[]>>;
 }
 
 export function Assignments(

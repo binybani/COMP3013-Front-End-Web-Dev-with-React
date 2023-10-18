@@ -1,0 +1,64 @@
+/* calendar.module.css */
+.calendarContainer {
+  position: relative;
+}
+
+/* .calendarButton button {
+  height: 100%;
+  padding: 0 16px;
+  background: #8284fa;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.calendarButton button:disabled {
+  background: lightgray;
+  cursor: no-drop;
+  color: darkgray;
+} */
+
+.calendarButton:hover + .calendarWrapper {
+  transform: translateX(0);
+  opacity: 1;
+  display: block;
+}
+
+.calendarWrapper {
+  position: absolute;
+  top: 100%;
+  right: 0%;
+  display: none;
+  background-color: #262626;
+}
+
+.calendarWrapper button {
+  /* all: initial; */
+  /* background: #4a4a4a; */
+  background: initial;
+  /* color: #fff; */
+  /* border: none; 
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  font-size: 14px; */
+}
+
+.calendarWrapper button:hover {
+  /* all: initial; */
+
+  /* background: #8284fa; */
+  color: #000;
+}
+
+.calendarWrapper:hover {
+  opacity: 1;
+  display: block;
+}
