@@ -22,6 +22,19 @@ p.textCompleted {
   text-decoration: line-through;
 }
 
+.dueDate {
+  border-radius: 25px 25px 25px 25px;
+  padding: 10px;
+  background-color: #4a4a4a;
+}
+
+.dueTomorrow {
+  border-radius: 25px 25px 25px 25px;
+  padding: 10px;
+  background-color: red;
+  font-weight: bold;
+}
+
 .checkContainer {
   width: 18px;
   height: 18px;

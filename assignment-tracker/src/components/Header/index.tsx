@@ -20,24 +20,29 @@ export function Header(
     selectedDate,
     setSelectedDate
   }: HeaderProps) {
+
   return (
     <header className={styles.header}>
       {/* This is simply to show you how to use helper functions */}
       <h1>{uppercase("bcit")} Assignment Tracker</h1>
       <form onSubmit={createAssignmentHandler} className={styles.newAssignmentForm}>
         <input 
-        onChange={inputHandler} 
-        placeholder="Add a new assignment" 
-        type="text" 
-        value={enteredText}
+          onChange={inputHandler} 
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              createAssignmentHandler(e);
+            }
+          }}
+          placeholder="Add a new assignment" 
+          type="text" 
+          value={enteredText}
         />
         <Calendar
-          // inputHandler={inputHandler}
           buttonState={buttonState}
           selectedDate={selectedDate}
           setSelectedDate={setSelectedDate}
         />
-        <button onClick={createAssignmentHandler} type="button" disabled={buttonState}>
+        <button onClick={createAssignmentHandler} type="submit" disabled={buttonState}>
           Create <AiOutlinePlusCircle size={20} />
         </button>
       </form>

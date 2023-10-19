@@ -20,15 +20,19 @@ export function Assignment(
         {
           enteredAssignments.map((assignment) => (
             <div key={assignment.id} className={styles.assignment}>
-              <button onClick={()=>checkButtonHandler(assignment.id)} className={ styles.checkContainer}>
+              <button onClick={()=>checkButtonHandler(assignment.id)} className={styles.checkContainer}>
                 {assignment.isChecked ? (
                     <BsCheckCircleFill size={20}  style={{backgroundColor: "white", borderRadius: "999px"}}/>
                   ) : (
                     <div />
                   )}
               </button>
-              <p>{assignment.text}</p>
-              <p>Due: {assignment.due} days</p>
+              <p className={`${assignment.isChecked ? styles.textCompleted : ''}`}>
+                {assignment.text} &nbsp; &nbsp;
+                <span className={`${assignment.due > 1 ? styles.dueDate : styles.dueTomorrow}`}>
+                  {assignment.due > 1 ?  `Due: ${assignment.due} days` : `Due: Tomorrow`} 
+                </span>
+              </p>
               <button onClick={()=>deleteHandler(assignment.id)} className={styles.deleteButton}>
                 <TbTrash size={20} />
               </button>

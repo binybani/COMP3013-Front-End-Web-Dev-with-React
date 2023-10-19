@@ -2,45 +2,44 @@ import styles from "./calendar.module.css";
 import {DayPicker} from 'react-day-picker';
 import 'react-day-picker/dist/style.css'
 import { BsCalendar2Plus } from "react-icons/bs";
-import { format } from "date-fns";
 import { useState } from "react";
 
 type CalendarProps = {
-  // inputHandler: (event: any) => void;
   buttonState: boolean;
   selectedDate: Date | undefined;
   setSelectedDate: (selectedDate: Date | undefined) => void;
 }
 export default function Calendar(
   {
-    // inputHandler, 
     buttonState,
     selectedDate, 
     setSelectedDate
   }: CalendarProps) {
   const [showCalendar, setShowCalendar] = useState(false);
+
   const handleIconClick = (event: React.MouseEvent) => {
     event.preventDefault();
   };
 
-  const handleDayClick = (date: Date) => {
+  const handleDayClick = (date: Date) => {  
     setSelectedDate(date);
   };
-  const handleMouseEnter = () => {
-    if (!buttonState) {
-      setShowCalendar(true);
-    }
+
+  const handleShowCalendar = () => {
+    setShowCalendar(true);
   };
 
-  const handleMouseLeave = () => {
+  const handleHideCalendar = () => {
     setShowCalendar(false);
   };
 
   return (
   <div className={styles.calendarContainer}>
     <button 
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseEnter={handleShowCalendar}
+      onMouseLeave={handleHideCalendar}
+      onFocus={handleShowCalendar}
+      onBlur={handleHideCalendar}
       onClick={handleIconClick}
       disabled={buttonState}
       className={styles.calendarButton}
@@ -48,19 +47,17 @@ export default function Calendar(
       <BsCalendar2Plus size={20}/>
     </button>
     {showCalendar && (
-        <div 
-        onMouseEnter={handleMouseEnter} 
-        onMouseLeave={handleMouseLeave} 
-        className={styles.calendarWrapper}
+        <div
+          tabIndex={0}
+          className={`${styles.calendarWrapper} ${showCalendar && styles.visible}`}
+          onMouseEnter={handleShowCalendar}
+          onMouseLeave={handleHideCalendar}
         >
           <DayPicker
             mode="single"
             selected={selectedDate}
+            onSelect={setSelectedDate}
             onDayClick={handleDayClick}
-            // modifiers={{
-            //   selectedDay: (d) => d.getDate() === selectedDate?.getDate(),
-            //   unselectedDay: (d) => d.getDate() !== selectedDate?.getDate(),
-            // }}
           />
         </div>
       )}
