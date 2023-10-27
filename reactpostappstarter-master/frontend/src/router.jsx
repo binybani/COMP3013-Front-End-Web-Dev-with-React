@@ -37,6 +37,7 @@ export const Router = () => {
     createRoutesFromElements(
       <Route element={<Layout />}>
         <Route path="login" element={<LoginPage />} />
+        {/* 위 와 동일하게 다른 버튼을 추가할수 있음. */}
         <Route
           path="posts"
           element={
@@ -45,6 +46,7 @@ export const Router = () => {
             </ProtectedRoute>
           }
           loader={postsLoader}
+          // 아만이 하나 만들어 둔것 , 추가로 만들어야 함.
         />
         <Route
           path="/posts/:id"
