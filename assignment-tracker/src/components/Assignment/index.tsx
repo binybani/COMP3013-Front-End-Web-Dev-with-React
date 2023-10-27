@@ -31,6 +31,7 @@ export function Assignment(
                 {assignment.text} &nbsp; &nbsp;
                 <span className={`${assignment.due > 1 ? styles.dueDate : styles.dueTomorrow}`}>
                   {assignment.due > 1 ?  `Due: ${assignment.due} days` : `Due: Tomorrow`} 
+            
                 </span>
               </p>
               <button onClick={()=>deleteHandler(assignment.id)} className={styles.deleteButton}>
