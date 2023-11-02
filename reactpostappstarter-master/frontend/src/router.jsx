@@ -36,17 +36,23 @@ export const Router = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route element={<Layout />}>
-        <Route path="login" element={<LoginPage />} />
-        {/* 위 와 동일하게 다른 버튼을 추가할수 있음. */}
+        <Route path="/login" element={<LoginPage />} />
         <Route
-          path="posts"
+          path="/posts/create"
+          element={
+            <ProtectedRoute isAllowed={!!authCheck}>
+              <CreatePostPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/posts"
           element={
             <ProtectedRoute isAllowed={!!authCheck}>
               <PostPage />
             </ProtectedRoute>
           }
           loader={postsLoader}
-          // 아만이 하나 만들어 둔것 , 추가로 만들어야 함.
         />
         <Route
           path="/posts/:id"
@@ -56,14 +62,6 @@ export const Router = () => {
             </ProtectedRoute>
           }
           loader={postDetailsLoader}
-        />
-        <Route
-          path="/posts/create"
-          element={
-            <ProtectedRoute isAllowed={!!authCheck}>
-              <CreatePostPage />
-            </ProtectedRoute>
-          }
         />
         <Route path="/" element={<Landing />} />
         <Route path="*" element={<NotFound />} />
