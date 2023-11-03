@@ -8,7 +8,7 @@ export const PostPage = () => {
   const posts = useLoaderData();
   return (
     <Container>
-      <SimpleGrid cols={3}>
+      <SimpleGrid h={400} cols={3}>
         {posts?.map((post) => (
           <ArticleCardImage key={post.title} {...post} />
         ))}

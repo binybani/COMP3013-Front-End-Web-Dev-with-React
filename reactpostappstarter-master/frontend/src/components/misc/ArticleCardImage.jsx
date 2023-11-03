@@ -4,14 +4,15 @@ import classes from "./ArticleCardImage.module.css";
 
 export function ArticleCardImage({ title, category, image, id }) {
   return (
+
     <Paper
       shadow="md"
       p="xl"
       radius="md"
-      style={{ backgroundImage: `url(${image})` }}
+      style={{ backgroundImage: `url(${image})`}}
       className={classes.card}
     >
-      <div>
+      <div style={{ maxHeight: "50vh",}}>
         <Text className={classes.category} size="xs">
           {category}
         </Text>
@@ -19,9 +20,10 @@ export function ArticleCardImage({ title, category, image, id }) {
           {title}
         </Title>
       </div>
-      <Button variant="white" color="dark">
+      <Button variant="white" color="dark" className={classes.viewBtn}>
         <Link to={id.toString()}>View</Link>
       </Button>
     </Paper>
+    
   );
 }

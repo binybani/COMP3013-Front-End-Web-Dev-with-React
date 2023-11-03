@@ -43,15 +43,29 @@ app.post("/api/user/validation", (req, res) => {
 });
 
 app.get("/api/posts", async (req, res) => {
+  const token =req.headers["Authorization"];
   // Sleep delay goes here
   res.json(posts);
 });
 
 // ⭐️ TODO: Implement this yourself
 app.get("/api/posts/:id", (req, res) => {
-  const id = req.params.id;
-  // The line below should be fixed.
-  res.json(posts[0]);
+  const id = req.params.id;//postDetailsLoader에서 (`${DOMAIN}/api/posts/${params.id}`);->이부분에서 params.id가져옴
+  const foundPost = posts[Number(id) - 1];
+  // find post owner
+  const foundPostOwner = findUserById(Number(id));
+  // find login user
+  const authHeader = req.headers.authorization;
+  const token = parseToken(authHeader, res);
+  const decodedUser = jwt.verify(token, "secret");
+  const foundUser = findUserById((decodedUser as IDecodedUser).id);
+  // make post data object
+  const postData = {
+    post: foundPost,
+    user: foundUser,
+    postOwner: foundPostOwner,
+  };
+  res.json(postData);
 });
 
 /**
