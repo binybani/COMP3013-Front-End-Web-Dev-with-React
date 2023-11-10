@@ -13,6 +13,8 @@ import {
 import { PostPage, postsLoader } from "./pages/Post/Post.page";
 import { postDetailsLoader } from "./pages/Post/PostDetails.page";
 import PostDetailsPage from "./pages/Post/PostDetails.page";
+// import EditPostPage from "./pages/Post/EditPost.page";
+// import { editDetailsLoader } from "./pages/Post/EditPost.page";
 
 export const Router = () => {
   const authCheck = useBoundStore((state) => {
@@ -54,15 +56,28 @@ export const Router = () => {
           }
           loader={postsLoader}
         />
-        <Route
+        
+        <Route // 1. user가 path로 이동하면
           path="/posts/:id"
           element={
             <ProtectedRoute isAllowed={!!authCheck}>
               <PostDetailsPage />
             </ProtectedRoute>
           }
-          loader={postDetailsLoader}
+          // 2. loader가 호출됨, 
+          // loader 함수는 비동기 작업(e.g. fetch data)을 수행하고 데이터를 로드함 
+          // 데이터 로드가 완료 되면 페이지 컴포넌트가 rendering됨 (여기선 <PostDetailsPage/>)
+          loader={postDetailsLoader} 
         />
+        {/* <Route
+          path="/posts/:id/edit"
+          element={
+            <ProtectedRoute isAllowed={!!authCheck}>
+              <EditPostPage />
+            </ProtectedRoute>
+          }
+          loader={editDetailsLoader} 
+        /> */}
         <Route path="/" element={<Landing />} />
         <Route path="*" element={<NotFound />} />
       </Route>

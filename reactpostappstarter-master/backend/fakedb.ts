@@ -30,15 +30,22 @@ export const posts = [
     userId: 2,
   },
 ];
-
-export const addPost = (post: any) => {
-  //  Issues:
-  //  *     The request body contains the title, category, and image,
-  //  *     but the addPost function needs to add a unique id
-  //  *     and the id of the currently logged in user to the post.
-  post.id = 3;
-  post.userId = 2;
-  posts.push(post);
+const jwt = require('jsonwebtoken');
+const { v4: uuidv4 } = require('uuid');
+export const addPost = (post: any, token:string) => {
+  try {
+    if (token) {
+      const decodedToken = jwt.decode(token);
+      if (decodedToken) {
+        const userId = decodedToken.id;
+        post.id = uuidv4(); 
+        post.userId = userId;
+        posts.push(post);
+      }
+    }
+  } catch (error) {
+    console.error('Error while adding a post:', error);
+  }
 };
 
 export const verifyUser = (email: string, password: string) => {

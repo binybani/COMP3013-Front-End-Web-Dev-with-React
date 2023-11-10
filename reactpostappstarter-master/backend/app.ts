@@ -45,6 +45,7 @@ app.post("/api/user/validation", (req, res) => {
 app.get("/api/posts", async (req, res) => {
   const token =req.headers["Authorization"];
   // Sleep delay goes here
+  sleep(5000);
   res.json(posts);
 });
 
@@ -79,9 +80,43 @@ app.get("/api/posts/:id", (req, res) => {
  *     with an empty/incorrect payload (post)
  */
 app.post("/api/posts", (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+    const token = parseToken(authHeader, res);
+    const incomingPost = req.body;
+    console.log("2323")
+
+    addPost(incomingPost, token);
+    console.log("11111")
+    console.log("11343333111")
+
+    res.status(200).json({ success: true });
+  } catch (error) {
+    res.status(401).json({ error });
+  }
+});
+
+app.post("/api/posts/update", (req, res) => {
   const incomingPost = req.body;
-  addPost(incomingPost);
-  res.status(200).json({ success: true });
+  const id = incomingPost.id
+  const foundPost = posts.find((findPost) => findPost.id === id);
+  
+  //will not work when foundPost is undefined
+  if (foundPost && foundPost.id == incomingPost.id) {
+      foundPost.title = incomingPost.title; 
+      foundPost.category = incomingPost.category; 
+      foundPost.image = incomingPost.image; 
+      foundPost.content = incomingPost.content; 
+
+    const index = posts.findIndex((post) => post.id === foundPost?.id);
+    if (index !== -1) {
+      posts[index] = foundPost;
+    }
+    console.log("updated post123L",posts)
+    res.json(posts);
+  } else {
+    res.status(404).json({ error: "Post not found" });
+  }
 });
 
 app.listen(port, () => console.log("Server is running"));

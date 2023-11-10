@@ -25,6 +25,6 @@
   text-transform: uppercase;
 }
 .viewBtn {
-  position: absolute; /* .viewBtn를 absolute 포지션으로 설정 */
-  top: 250px; /* 원하는 여백 값 설정 */
+  position: absolute;
+  top: 250px;
 }
