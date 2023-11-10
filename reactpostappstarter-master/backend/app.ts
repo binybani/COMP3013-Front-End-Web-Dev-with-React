@@ -59,11 +59,11 @@ app.get("/api/posts/:id", (req, res) => {
   const authHeader = req.headers.authorization;
   const token = parseToken(authHeader, res);
   const decodedUser = jwt.verify(token, "secret");
-  const foundUser = findUserById((decodedUser as IDecodedUser).id);
+  const foundLoginUser = findUserById((decodedUser as IDecodedUser).id);
   // make post data object
   const postData = {
     post: foundPost,
-    user: foundUser,
+    loginUser: foundLoginUser,
     postOwner: foundPostOwner,
   };
   res.json(postData);
@@ -84,19 +84,14 @@ app.post("/api/posts", (req, res) => {
     const authHeader = req.headers.authorization;
     const token = parseToken(authHeader, res);
     const incomingPost = req.body;
-    console.log("2323")
-
     addPost(incomingPost, token);
-    console.log("11111")
-    console.log("11343333111")
-
     res.status(200).json({ success: true });
   } catch (error) {
     res.status(401).json({ error });
   }
 });
 
-app.post("/api/posts/update", (req, res) => {
+app.post("/api/posts/edit", (req, res) => {
   const incomingPost = req.body;
   const id = incomingPost.id
   const foundPost = posts.find((findPost) => findPost.id === id);

@@ -1,8 +1,7 @@
 import DOMAIN from "../../services/endpoint";
 import axios from "axios";
 import { ArticleCardImage } from "../../components/misc/ArticleCardImage";
-import { SimpleGrid, Container, LoadingOverlay
-  , Box, Group, Button, Text } from "@mantine/core";
+import { SimpleGrid, Container, LoadingOverlay, Box } from "@mantine/core";
 import { useLoaderData } from "react-router-dom";
 import { useDisclosure } from "@mantine/hooks";
 import { useEffect, useState } from "react";
