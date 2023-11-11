@@ -7,7 +7,6 @@ import { useEditStore } from "../../store/EditStore";
 
 function PostDetailsPage() {
   const postData = useLoaderData(); // load한 데이터를 가져옴
-  console.log("디테일 페이지 로드한 데이터 확인", postData)
   const post = postData.post;
   const postOwner = postData.postOwner;
   const postOwnerEmail = postOwner.email;
@@ -133,7 +132,6 @@ function PostDetailsPage() {
   //     userId: 2,
   //   },
   // }
-  // console.log(res);
   console.log("PostDetailsPage");
 
   // 4. 가져온 정보에서 data를 사용하도록 함.

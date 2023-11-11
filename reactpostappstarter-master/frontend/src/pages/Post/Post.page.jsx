@@ -51,6 +51,6 @@ export const PostPage = () => {
 
 export const postsLoader = async () => {
   const res = await axios.get(`${DOMAIN}/api/posts`);
-  console.log("PostPage", res);
+  console.log("PostPage");
   return res.data;
 };

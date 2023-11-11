@@ -8,7 +8,6 @@ import useBoundStore from "../../store/Store";
 function CreatePostPage() {
   const navigate = useNavigate();
   const { user } = useBoundStore((state) => state);
-  console.log("유져",user)
   const form = useForm({
     initialValues: {
       id: "",
@@ -21,7 +20,6 @@ function CreatePostPage() {
   });
   const handleSubmit = async (values) => {
     const res = await axios.post(`${DOMAIN}/api/posts`, values);
-    console.log(values)
     if (res?.data.success) {
       navigate("/posts");
     }

@@ -54,7 +54,8 @@ app.get("/api/posts/:id", (req, res) => {
   const id = req.params.id;//postDetailsLoader에서 (`${DOMAIN}/api/posts/${params.id}`);->이부분에서 params.id가져옴
   const foundPost = posts[Number(id) - 1];
   // find post owner
-  const foundPostOwner = findUserById(Number(id));
+  const postUserId = foundPost.userId;
+  const foundPostOwner = findUserById(postUserId);
   // find login user
   const authHeader = req.headers.authorization;
   const token = parseToken(authHeader, res);
