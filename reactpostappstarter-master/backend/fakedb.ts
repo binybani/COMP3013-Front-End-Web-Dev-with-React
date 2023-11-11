@@ -30,18 +30,14 @@ export const posts = [
     userId: 2,
   },
 ];
-const jwt = require('jsonwebtoken');
-const { v4: uuidv4 } = require('uuid');
-export const addPost = (post: any, token:string) => {
+
+export const addPost = (post: any, userId: number) => {
   try {
-    if (token) {
-      const decodedToken = jwt.decode(token);
-      if (decodedToken) {
-        const userId = decodedToken.id;
-        post.id = uuidv4(); 
-        post.userId = userId;
-        posts.push(post);
-      }
+    if (userId) {
+      const lastPostId = posts.length > 0 ? posts[posts.length - 1].id : 0;
+      post.id = lastPostId + 1;
+      post.userId = userId;
+      posts.push(post);
     }
   } catch (error) {
     console.error('Error while adding a post:', error);

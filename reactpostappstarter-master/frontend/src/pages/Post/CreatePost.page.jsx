@@ -3,20 +3,25 @@ import DOMAIN from "../../services/endpoint";
 import axios from "axios";
 import { useForm } from "@mantine/form";
 import { useNavigate } from "react-router-dom";
+import useBoundStore from "../../store/Store";
 
 function CreatePostPage() {
   const navigate = useNavigate();
+  const { user } = useBoundStore((state) => state);
+  console.log("유져",user)
   const form = useForm({
     initialValues: {
+      id: "",
       title: "",
       category: "",
       image: "",
       content: "",
+      userId: user.id,
     },
   });
-
   const handleSubmit = async (values) => {
     const res = await axios.post(`${DOMAIN}/api/posts`, values);
+    console.log(values)
     if (res?.data.success) {
       navigate("/posts");
     }

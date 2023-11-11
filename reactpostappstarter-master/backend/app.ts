@@ -83,8 +83,11 @@ app.post("/api/posts", (req, res) => {
   try {
     const authHeader = req.headers.authorization;
     const token = parseToken(authHeader, res);
+    const decodedUser = jwt.verify(token, "secret");
+    const loginUserId = (decodedUser as IDecodedUser).id
+
     const incomingPost = req.body;
-    addPost(incomingPost, token);
+    addPost(incomingPost, loginUserId);
     res.status(200).json({ success: true });
   } catch (error) {
     res.status(401).json({ error });
@@ -107,7 +110,6 @@ app.post("/api/posts/edit", (req, res) => {
     if (index !== -1) {
       posts[index] = foundPost;
     }
-    console.log("updated post123L",posts)
     res.json(posts);
   } else {
     res.status(404).json({ error: "Post not found" });
