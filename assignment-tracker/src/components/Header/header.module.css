@@ -33,7 +33,7 @@
   color: #808080;
 }
 
-.newAssignmentForm button {
+.buttonFrom {
   height: 100%;
   padding: 0 16px;
   background: #8284fa;
@@ -47,7 +47,7 @@
   font-size: 14px;
 }
 
-.newAssignmentForm button:disabled {
+.buttonForm:disabled {
   background: lightgray;
   cursor: no-drop;
   color: darkgray;

@@ -34,7 +34,7 @@ export default function Calendar(
   };
 
   return (
-  <div className={styles.calendarContainer}>
+  <div>
     <button 
       onMouseEnter={handleShowCalendar}
       onMouseLeave={handleHideCalendar}
@@ -42,7 +42,7 @@ export default function Calendar(
       onBlur={handleHideCalendar}
       onClick={handleIconClick}
       disabled={buttonState}
-      className={styles.calendarButton}
+      className={styles.buttonForm}
     >
       <BsCalendar2Plus size={20}/>
     </button>

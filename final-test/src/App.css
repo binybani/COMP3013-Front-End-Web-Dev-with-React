@@ -1,0 +1,15 @@
+li {
+  list-style: none;
+}
+.food-section {
+  display: flex;
+}
+.food-name {
+  width: 10%;
+  font-weight: 700;
+  margin: 10px;
+}
+.food-description {
+  font-weight: 200;
+  margin: 10px;
+}

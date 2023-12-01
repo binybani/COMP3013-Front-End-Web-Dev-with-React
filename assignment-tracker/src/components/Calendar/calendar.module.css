@@ -1,8 +1,8 @@
 /* calendar.module.css */
-.calendarButton:hover + .calendarWrapper {
+/* .calendarButton:hover + .calendarWrapper {
   transform: translateX(0);
   display: block;
-}
+} */
 
 .calendarWrapper {
   all: initial;
@@ -37,4 +37,24 @@
 
 .rdp-day_selected {
   color: #fff;
+}
+
+.buttonFrom {
+  height: 100%;
+  padding: 0 16px;
+  background: #8284fa;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.buttonForm:disabled {
+  background: lightgray;
+  cursor: no-drop;
+  color: darkgray;
 }

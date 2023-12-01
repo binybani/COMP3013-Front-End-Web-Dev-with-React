@@ -42,7 +42,7 @@ export function Header(
           selectedDate={selectedDate}
           setSelectedDate={setSelectedDate}
         />
-        <button onClick={createAssignmentHandler} type="submit" disabled={buttonState}>
+        <button onClick={createAssignmentHandler} type="submit" disabled={buttonState} className={styles.buttonForm}>
           Create <AiOutlinePlusCircle size={20} />
         </button>
       </form>
