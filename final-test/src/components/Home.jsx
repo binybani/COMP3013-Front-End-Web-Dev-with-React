@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { foods } from "./data";
 
 export default function Home() {
@@ -9,7 +9,6 @@ export default function Home() {
     setSearchText(targetWord);
   };
   const foodsData = foods;
-  console.log("!!!!!!!!!!!!!!!!!!!!!!",foodsData)
 
   // const filteredFood = foodsData.filter((food) => food.name.toLowerCase().includes(searchText.toLowerCase())
   //  || food.description.toLowerCase().includes(searchText.toLowerCase())
@@ -29,7 +28,18 @@ export default function Home() {
     if (filteredFood.length == 0 || searchText.length == 0) return foodsData;
     else return filteredFood;
   }
-
+  function getHighlightedText(text, higlight) {
+    var parts = text.split(new RegExp(`(${higlight})`, "gi"));
+    return parts.map((part, index) => (
+      <React.Fragment key={index}>
+        {part.toLowerCase() === higlight.toLowerCase() ? (
+          <b style={{ backgroundColor: "#e8bb49" }}>{part}</b>
+        ) : (
+          part
+        )}
+      </React.Fragment>
+    ));
+  }
   return (
     <>
     <h1>Search Food</h1>
@@ -41,25 +51,10 @@ export default function Home() {
       />
       <ul>
         {filteredFood().map((food) => (   
-              <>              
+              <>            
           <li key={food.id} className="food-section">
-          {food.name.includes(searchText) ? (
-              <div className="food-name" >
-                {food.name.split(searchText)[0]}
-                <span style={{ backgroundcolor: "#3F51B5" }}>{searchText}</span>
-                {food.name.split(searchText)[1]}
-              </div>
-            ) : (
-              <div className="food-name">
-              {food.name}  
-            </div>
-            )}
-            {/* <div className="food-name">
-              {food.name}  
-            </div> */}
-            <div className="food-description">
-              {food.description}
-            </div>
+            <div className="food-section">{getHighlightedText(food.name, searchText)}</div>
+            <div className="food-description">{getHighlightedText(food.description, searchText)}</div>
           </li>
           </>
         ))}
